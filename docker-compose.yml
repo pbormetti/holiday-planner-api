@@ -1,0 +1,34 @@
+version: "3"
+services:
+
+  db:
+    image: mariadb
+    environment:
+      - MYSQL_DATABASE=holiday_planner
+      - MYSQL_USER=holiday_planner
+      - MYSQL_PASSWORD=my-secret-password
+      - MYSQL_ROOT_PASSWORD=my-secret-root-password
+
+  php:
+    privileged: true
+    build: "./docker/php"
+    volumes:
+      - ".:/srv/www/website"
+    depends_on:
+      - db
+    links:
+      - db
+    ports:
+      - "9000:9999"
+
+  web:
+    privileged: true
+    build: "./docker/web"
+    volumes:
+      - ".:/srv/www/website"
+    depends_on:
+      - php
+    links:
+      - php
+    ports:
+      - "8000:80"
