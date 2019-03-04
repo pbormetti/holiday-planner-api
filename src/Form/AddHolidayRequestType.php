@@ -19,13 +19,13 @@ final class AddHolidayRequestType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add("employee", EntityType::class, ["class" => Employee::class]);
+        $builder->add("employee", EntityType::class, ["class" => Employee::class, "choice_value" => "name"]);
         $builder->add("start", DateTimeType::class, ["widget" => "single_text", "format" => "yyyy-MM-dd"]);
         $builder->add("end", DateTimeType::class, ["widget" => "single_text", "format" => "yyyy-MM-dd"]);
-        $builder->add("businessUnit", EntityType::class, ["class" => BusinessUnit::class]);
+        $builder->add("businessUnit", EntityType::class, ["class" => BusinessUnit::class, "choice_value" => "name"]);
         $builder->add("note", TextType::class);
-        $builder->add("responsible1", EntityType::class, ["class" => Responsible::class]);
-        $builder->add("responsible2", EntityType::class, ["class" => Responsible::class]);
+        $builder->add("responsible1", EntityType::class, ["class" => Responsible::class, "choice_value" => "name"]);
+        $builder->add("responsible2", EntityType::class, ["class" => Responsible::class, "choice_value" => "name"]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
